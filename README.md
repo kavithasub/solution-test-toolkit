@@ -5,33 +5,32 @@ This repository includes common guidelines, samples and references which needs t
 ## Repository Structure
 
 ```
-
-├── README.md
-├── Template
- |	└── JMX
- |	└── Shell Script
-├── IS
- |	└── Samples
- |	|	└── Admin Services
- |   	|	|	├── IDP
- |   	|	|	├── SP
- |	|	└── Selenium
- |   	|	|	├── Automated Google Login
- |	|     	|	├── Automated Twitter Login
- |	└── Artifacts
-├── APIM
+solution-test-toolkit
+    ├── APIM
+    │   └── README.md
+    ├── IS
+    │   ├── artifacts
+    │   │   └── ReadME.md
+    │   └── samples
+    │       ├── Create_IDP_using_AdminService.jmx
+    │       └── Delete_IDP_using_AdminService.jmx
+    ├── README.md
+    └── templates
+        └── README.md
 
 ```
 
-Templates
+**/templates**
 
-<Product-Repo>/Samples
+This are the generic templates that can be used when writing tests. For example JMeter templates can be used as basic building blocks for solution automation. 
+
+**<Product-Directory>/samples**
 
 This contains samples for different operations, you can read more from here.
 
+**<Product-Directory>/artifacts**
 
-
-
+This contains references for product specific common artifacts templates.
 
 # Test Execution Phases
 
