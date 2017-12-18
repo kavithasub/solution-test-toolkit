@@ -20,13 +20,13 @@ solution-test-toolkit
 
 ```
 
-**/templates**
+**templates**
 
-This are the generic templates that can be used when writing tests. For example JMeter templates can be used as basic building blocks for solution automation. 
+This directory includes the generic templates that can be used when writing tests. For example JMeter templates can be used as basic building blocks for solution automation. 
 
 **<Product-Directory>/samples**
 
-This contains samples for different operations, you can read more from here.
+This contains samples for different operations, you can read more from <repo url here>.
 
 **<Product-Directory>/artifacts**
 
@@ -35,8 +35,7 @@ This contains references for product specific common artifacts templates.
 # Test Execution Phases
 
 
-
-===== Need to add a proper Diagram and following points should be addressed ====
+![Alt text](/screenshots/3.png?raw=true "Login")
 
 What you need to know in each phase. What are the scripts needed. What each script does and How to add scripts.
 
@@ -182,10 +181,11 @@ Always follow the recommended best practices for managing the scripts.
 Use meaningful naming conventions for all the components(Thread groups, samplers) inside the scripts.
 Use setup and teardown thread groups in addition to the default thread/s with test steps.
 
+![Alt text](/screenshots/5.png?raw=true "Login")
 
 Use “Simple Controller” component for grouping and managing samples inside the Thread Groups.
 
-
+![Alt text](/screenshots/4.png?raw=true "Login")
 
 Generic best practices for writing JMeter scripts can be found in the below urls. http://jmeter.apache.org/usermanual/best-practices.html
 
@@ -196,13 +196,13 @@ First, have in mind that selenium tests will also be run within JMeter and not a
 Steps to add a JSR223 Sampler to your test suite.
 Right click on your thread group and select Add -> Sampler -> JSR223 Sampler
 	
-	
+![Alt text](/screenshots/1.png?raw=true "Login")	
 
 
 Ones you add the JSR223 Sampler make sure to change the “Language” as java (BeanShell / Beanshell Engine)
 	
 	
-
+![Alt text](/screenshots/2.png?raw=true "Login")
  
 
 # Setting up Prerequisites
