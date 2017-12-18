@@ -4,6 +4,8 @@ This repository includes common guidelines, samples and references which needs t
 
 ## Repository Structure
 
+```
+
 ├── README.md
 ├── Template
  |	└── JMX
@@ -18,6 +20,8 @@ This repository includes common guidelines, samples and references which needs t
  |	|     	|	├── Automated Twitter Login
  |	└── Artifacts
 ├── APIM
+
+```
 
 Templates
 
@@ -58,6 +62,7 @@ At the moment this is done manually, test infrastructure always reside on AWS an
 ## Test Solution Repository Structure
 When writing solution tests for a given product, we need to follow the following repository structure. This structure contains scripts necessary to deploy/undeploy infrastructure, deploy/undeploy artefacts, test scripts and cleanup scripts. 
 
+```
 .
 ├── README.md
 ├── base-setup.sh
@@ -68,8 +73,10 @@ When writing solution tests for a given product, we need to follow the following
 │   └── YY-pre-scenario-steps.sh
 ├── resources
 
-XX - Sequential number : starts from 01..
-YY - Use solution number
+```
+
+- XX - Sequential number : starts from 01..
+- YY - Use solution number
 
 You can find a detailed description of the repository structure in 3.3 section
 
@@ -77,8 +84,9 @@ You can find a detailed description of the repository structure in 3.3 section
 
 Test artifacts deployment is handled by the set of shell scripts which are specific to the solution. Travelocity.com application[<url_for_repo>] is the main artifact we use in the identity server solutions.
 
-Lets consider solution 02 as an example. Inside the directory, we can see below hierarchy of files. All other scenarios should have the same hierarchy of contents.
+Lets consider **Solution 02** as an example. Inside the directory, we can see below hierarchy of files. All other scenarios should have the same hierarchy of contents.
 
+```
 .
 ├── README.md
 ├── base-setup.sh
@@ -91,48 +99,59 @@ Lets consider solution 02 as an example. Inside the directory, we can see below 
 │   └── user.properties
 └── teardown.sh
 
+```
+
 Below is the correct order of the steps which TG runs the scripts of the solutions.
 
-*Step [1]*
+**Step [1]**
 xx-pre-scenario-steps.sh - This is the initial file run by TG. Inside here, we are configuring the serverHost, serverPort, tomcatHost and tomcatPort parameters in user.properties file.
 And it calls to the base-setup.sh file which is in one level up.
-*[1.1]*
+**[1.1]**
 base-setup.sh - this is where we configure third party apps. Have used several linux command to configure and build applications. Also it will call tomcat rest API to publish configured apps.
 
-*Step [2]* 
+**Step [2]**
 As the next step TG invokes all the jmeter scripts inside jmeter directory.
 
-*Step [3]*
+**Step [3]**
 Finally TG invokes xx-post-scenario-steps.sh and it calls to the teardown.sh. Mainly we un-deploy the apps deployed in the tomcat server and also remove temporary directories which were created from step [1]
 
 We have to follow the same way of above naming convention on all the scenario scripts. 
 Ex:- pre and post scenario scripts’ name should be started with the solution number (two digits)
 The name of all jmeter scripts should be started with two digit number which starts from 01 and increment by sequentially.
 
-*How to test and verify locally:*
+**How to test and verify locally:**
 
 Once you are done with the automation scripts please verify those as in the same order explained above. 
 For verifying this locally, you can simply follow the below steps.
 Export input variables in the terminal
->>export serverHost=<is_host> serverPort=<is_port> tomcatHost=<tomcatHost> tomcatPort=<tomcatPort>
+**>>export serverHost=<is_host> serverPort=<is_port> tomcatHost=<tomcatHost> tomcatPort=<tomcatPort>**
 Ex:
+```
 >>export serverHost=is.localtest.com serverPort=9454 tomcatHost=localhost tomcatPort=8090
-
-Update below two lines in the base-setup.sh as replaccing values with your tomact user/password. 
+```
+Update below two lines in the base-setup.sh as replaccing values with your tomact user/password.
+```
 tomcatUsername=<username>
 tomcatPassword=<password>
-Important: you have to enable the role manager-script and assign that role to the particular user in tomcat-users.xml file which is in <tomcat_home>/conf/ directory
+```
+**Important** you have to enable the role manager-script and assign that role to the particular user in tomcat-users.xml file which is in <tomcat_home>/conf/ directory
 
 Follow the Step [1] above ( as being on the same terminal )
+```
 ex:-> sh xx.pre-scenario-steps.sh
+```
 
-Run jmeter scripts in command line (still on the same terminal :))
+Run jmeter scripts in command line (still on the same terminal)
+```
 ex:-> path/to/jmeter/bin -n -t xx.xxxx.jmx -p path/to/user.properties -l xxxx.jtl
+```
 
 Follow the step [2] above. 
+```
 ex:-> sh xx-post-scenario-steps.sh
+```
 
-Verifications:
+**Verifications**
 
 Check and verify with the console while you run above scripts and check whether there is no any errors in the console, server console or tomcat server logs.
 Use the Jmeter GUI and open the jtl file which generated from above step 3. If there is any jmeter failure then you can easily figure it out by using GUI.
@@ -145,8 +164,8 @@ This script should be used to make changes to the the deployment, for example if
 
 What are the tools you can use. 
 
-JMeter
-Selenium
+- JMeter
+- Selenium
 
 Where to apply each option;
 
