@@ -85,7 +85,7 @@ You can find a detailed description of the repository structure in 3.3 section
 
 Test artifacts deployment is handled by the set of shell scripts which are specific to the solution. Travelocity.com & Playground apps are the main artifacts we use in the identity server solutions. You can find the samples shipped with IS from https://github.com/wso2/product-is/tree/5.x.x/modules/samples.
 
-Lets consider **Solution 02** as an example. Inside the directory, we can see below hierarchy of files. All other scenarios should have the same hierarchy of contents.
+Lets consider **Solution 02** from the Identity server solutions [list] (https://medium.facilelogin.com/thirty-solution-patterns-with-the-wso2-identity-server-16f9fd0c0389) as an example. Inside the [directory] (https://github.com/wso2-incubator/identity-test-integration/tree/master/solution02/src/test), we can see below hierarchy of files. All other scenarios should have the same hierarchy of contents.
 
 ```
 .
