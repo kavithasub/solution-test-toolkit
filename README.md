@@ -1,6 +1,6 @@
 # Introduction #
 
-This repository includes common guidelines, samples and references which needs to be followed when automating solutions for TG execution. TG is a versatile platform which enables tests to be execute on top of different hardware/software combinations along with deployment pattern. You can read more about TG from here.
+This repository includes common guidelines, samples and references which needs to be followed when automating solutions for TG execution. TG is a versatile platform which enables tests to be executed on top of different hardware/software combinations along with WSO2 product deployment patterns. To explore further about TG you look intot the TG project from [here](https://github.com/wso2-incubator/wso2-test-grid).
 
 ## Repository Structure
 
@@ -24,11 +24,11 @@ solution-test-toolkit
 
 This directory includes the generic templates that can be used when writing tests. For example JMeter templates can be used as basic building blocks for solution automation. 
 
-**<Product-Directory>/samples**
+**samples**
 
-This contains samples for different operations, you can read more from <repo url here>.
+This directory contains samples for different operations, you can read more from <repo url here>.
 
-**<Product-Directory>/artifacts**
+**artifacts**
 
 This contains references for product specific common artifacts templates.
 
@@ -37,9 +37,12 @@ This contains references for product specific common artifacts templates.
 
 ![Alt text](/screenshots/3.png?raw=true "Login")
 
-What you need to know in each phase. What are the scripts needed. What each script does and How to add scripts.
-
-<explain high-level>
+The above image shows a highlevel flow of the various phases that is traveresed through during test execution. Below is a summary of each phase which will help you understand what types of scripts that you need to develop for your solution.
+- Test Grid - TG will take care of the solution deployment and provide us with the hostnames (Cluster hostname and Tomcat host / port)
+- Infra Creation - At the moment we need to request instances manually depending on the solution needs(instances to setup databases, ldap etc.).
+- Product Alterations - If the solution needs any dependencies that requires alteration to product configurations such cases should be handled in this phase.
+- App Alterations - In this phase if the solution requires any alterations to be done for the apps that are used those should be handled in this phase.
+- Clean up - Ones the solution tests are finished executing all clean up tasks should be executed to create a clean environment for the next solution to be run.
 
 
 
@@ -56,9 +59,9 @@ What you need to know in each phase. What are the scripts needed. What each scri
 
 # How to Develop Solution Tests
 ## Writing Infrastructure creation Scripts
-At the moment this is done manually, test infrastructure always reside on AWS and they are up and running. When a new instance is required this is created manually. This can be done automatically by developing CF scripts. 
+At the moment this is done manually, test infrastructure always reside on AWS and they are up and running. When a new instance is required TG team will create it manually and provide instance details on request. This can be done automatically by developing CF scripts. 
 ## Test Solution Repository Structure
-When writing solution tests for a given product, we need to follow the following repository structure. This structure contains scripts necessary to deploy/undeploy infrastructure, deploy/undeploy artefacts, test scripts and cleanup scripts. 
+When writing solution tests for a given product, we need to follow the following repository structure. This structure contains scripts necessary to deploy/undeploy infrastructure, deploy/undeploy artefacts, test scripts and cleanup scripts. The soltuions tests are maintained in this [repository](https://github.com/wso2-incubator/identity-test-integration).
 
 ```
 .
@@ -80,7 +83,7 @@ You can find a detailed description of the repository structure in 3.3 section
 
 ## Writing Test-Artifacts Deployment Scripts
 
-Test artifacts deployment is handled by the set of shell scripts which are specific to the solution. Travelocity.com application[<url_for_repo>] is the main artifact we use in the identity server solutions.
+Test artifacts deployment is handled by the set of shell scripts which are specific to the solution. Travelocity.com & Playground apps are the main artifacts we use in the identity server solutions. You can find the samples shipped with IS from https://github.com/wso2/product-is/tree/5.x.x/modules/samples.
 
 Lets consider **Solution 02** as an example. Inside the directory, we can see below hierarchy of files. All other scenarios should have the same hierarchy of contents.
 
@@ -104,7 +107,8 @@ Below is the correct order of the steps which TG runs the scripts of the solutio
 **Step [1]**
 xx-pre-scenario-steps.sh - This is the initial file run by TG. Inside here, we are configuring the serverHost, serverPort, tomcatHost and tomcatPort parameters in user.properties file.
 And it calls to the base-setup.sh file which is in one level up.
-**[1.1]**
+
+**Step [1.1]**
 base-setup.sh - this is where we configure third party apps. Have used several linux command to configure and build applications. Also it will call tomcat rest API to publish configured apps.
 
 **Step [2]**
@@ -154,7 +158,7 @@ ex:-> sh xx-post-scenario-steps.sh
 Check and verify with the console while you run above scripts and check whether there is no any errors in the console, server console or tomcat server logs.
 Use the Jmeter GUI and open the jtl file which generated from above step 3. If there is any jmeter failure then you can easily figure it out by using GUI.
 
-# Product deployment alterations
+# Product Deployment Alterations
 
 This script should be used to make changes to the the deployment, for example if you need to change a configuration in the IS deployment you need have that within this script. Similarly for changes regarding to connectors (copy .jars, add configurations) should also be handled in this script.
 
@@ -173,7 +177,7 @@ Selenium is the option when it has the limitations to automate the scenario from
 
 The test should be written in JMeter and you can use selenium within JMeter. Following explains how to write JMeter scripts and best practices to follow.
 
-### Writing Jmeter Scripts and Naming Conventions.
+### Writing Jmeter Scripts and Naming Conventions
 
 When writing JMeter scripts you can use the template available at <template_repo>. 
 
