@@ -26,7 +26,7 @@ This directory includes the generic templates that can be used when writing test
 
 **samples**
 
-This directory contains samples for different operations, you can read more from <repo url here>.
+This directory contains samples for different operations, you can read more from [here](https://github.com/jsonds/solution-test-toolkit/tree/master/IS/samples).
 
 **artifacts**
 
@@ -64,15 +64,24 @@ At the moment this is done manually, test infrastructure always reside on AWS an
 When writing solution tests for a given product, we need to follow the following repository structure. This structure contains scripts necessary to deploy/undeploy infrastructure, deploy/undeploy artefacts, test scripts and cleanup scripts. The soltuions tests are maintained in this [repository](https://github.com/wso2-incubator/identity-test-integration).
 
 ```
-.
-├── README.md
-├── base-setup.sh
-├── jmeter
-│   ├── XX-Solution-01-Facebook.jmx
-│   ├── XX-Solution-02-Google.jmx
-│   ├── YY-post-scenario-steps.sh
-│   └── YY-pre-scenario-steps.sh
-├── resources
+├── solution02
+│   ├── pom.xml
+│   ├── README.md
+│   └── src
+│       └── test
+│           ├── base-setup.sh
+│           ├── infra.sh
+│           ├── jmeter
+│           │   ├── XX-Soulution-02-Facebook.jmx
+│           │   ├── XX-post-scenario-steps.sh
+│           │   ├── YY-pre-scenario-steps.sh
+│           │   └── YY-Soulution-02-Google.jmx
+│           ├── resources
+│           │   ├── 01-config.sh
+│           │   ├── 02-config.sh
+│           │   └── user.properties
+│           └── teardown.sh
+
 
 ```
 
@@ -158,7 +167,7 @@ ex:-> sh xx-post-scenario-steps.sh
 Check and verify with the console while you run above scripts and check whether there is no any errors in the console, server console or tomcat server logs.
 Use the Jmeter GUI and open the jtl file which generated from above step 3. If there is any jmeter failure then you can easily figure it out by using GUI.
 
-# Product Deployment Alterations
+# Product Deployment Alterations (config set)
 
 This script should be used to make changes to the the deployment, for example if you need to change a configuration in the IS deployment you need have that within this script. Similarly for changes regarding to connectors (copy .jars, add configurations) should also be handled in this script.
 
