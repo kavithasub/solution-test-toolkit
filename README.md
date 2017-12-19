@@ -210,11 +210,9 @@ Ones you add the JSR223 Sampler make sure to change the “Language” as java (
  
 
 # Setting up Prerequisites
-
-If IntroductionIntroduction
-
 Tests can be written in JMeter 
 
+To develop solution baseds tests there are several prerequisites (Create IDP, SP, Policies etc.) that needs to be created before the solution tests are executed. These prerequisites should should be scripted in JMeter with the use of admin services provided by the product.
 
 
 
