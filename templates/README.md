@@ -1,4 +1,4 @@
-# Introduction
+## Introduction
 Generic automation script templates with the best practices and common standard are maintained here.
 
 Few of the Jmeter best practicses are explained in the below
