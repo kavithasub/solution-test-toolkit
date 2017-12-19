@@ -65,22 +65,19 @@ When writing solution tests for a given product, we need to follow the following
 
 ```
 ├── solution02
-│   ├── pom.xml
+│   ├── base-setup.sh
+│   ├── infra.sh
+│   ├── jmeter
+│   │   ├── XX-Soulution-02-Facebook.jmx
+│   │   ├── XX-post-scenario-steps.sh
+│   │   ├── YY-pre-scenario-steps.sh
+│   │   └── YY-Soulution-02-Google.jmx
 │   ├── README.md
-│   └── src
-│       └── test
-│           ├── base-setup.sh
-│           ├── infra.sh
-│           ├── jmeter
-│           │   ├── XX-Soulution-02-Facebook.jmx
-│           │   ├── XX-post-scenario-steps.sh
-│           │   ├── YY-pre-scenario-steps.sh
-│           │   └── YY-Soulution-02-Google.jmx
-│           ├── resources
-│           │   ├── 01-config.sh
-│           │   ├── 02-config.sh
-│           │   └── user.properties
-│           └── teardown.sh
+│   ├── resources
+│   │   ├── 01-config.sh
+│   │   ├── 02-config.sh
+│   │   └── user.properties
+│   └── teardown.sh
 
 
 ```
@@ -220,7 +217,7 @@ Ones you add the JSR223 Sampler make sure to change the “Language” as java (
 
 # Setting up Prerequisites
 
-To develop solution baseds tests there are several prerequisites (Create IDP, SP, Policies etc.) that needs to be created before the solution tests are executed. These prerequisites should should be scripted in JMeter with the use of admin services provided by the product.
+To develop solution baseds tests there are several prerequisites (Create IDP, SP, Policies etc.) that needs to be created before the solution tests are executed. These prerequisites should be scripted in JMeter with the use of admin services provided by the product.
 
 
 
