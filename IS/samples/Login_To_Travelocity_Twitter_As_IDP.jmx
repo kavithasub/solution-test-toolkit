@@ -20,12 +20,12 @@
           </elementProp>
           <elementProp name="twitterUserName" elementType="Argument">
             <stringProp name="Argument.name">twitterUserName</stringProp>
-            <stringProp name="Argument.value">jasonwso2qa@yahoo.com</stringProp>
+            <stringProp name="Argument.value">validTwitterUserName</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="twitterPassword" elementType="Argument">
             <stringProp name="Argument.name">twitterPassword</stringProp>
-            <stringProp name="Argument.value">aaAA12!@</stringProp>
+            <stringProp name="Argument.value">ValidtTwitterPassword</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
