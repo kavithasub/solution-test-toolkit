@@ -199,13 +199,13 @@ Use “Simple Controller” component for grouping and managing samples inside t
 
 Generic best practices for writing JMeter scripts can be found in the below urls. http://jmeter.apache.org/usermanual/best-practices.html
 
-### Writing Selenium Tests
+## Writing Selenium Tests
 
 First, have in mind that selenium tests will also be run within JMeter and not as a separate selenium project. These tests are ideally used to automate 3rd party app interactions such as login to twitter, facebook etc. Selenium scripts should be scripted using JSR223 Sampler ( Do not use beanshell sampler).
 
-## How to setup JMeter
+### How to setup JMeter
 - Add the Selenium/WebDriver Support plugin to JMeter. You can download this from the JMeter Plugins Manager by searching for "Selenium/WebDriver Support"
-- Add the "Selenium Standalone Server" .jar to <JMeter_HOME>/lib folder. You can download the .jar from [here] (https://goo.gl/hvDPsK)
+- Add the "Selenium Standalone Server" .jar to <JMeter_HOME>/lib folder. You can download the .jar from [here](https://goo.gl/hvDPsK)
 
 Steps to add a JSR223 Sampler to your test suite.
 Right click on your thread group and select Add -> Sampler -> JSR223 Sampler
