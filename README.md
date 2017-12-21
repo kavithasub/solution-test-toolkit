@@ -199,7 +199,7 @@ Use “Simple Controller” component for grouping and managing samples inside t
 
 Generic best practices for writing JMeter scripts can be found in the below urls. http://jmeter.apache.org/usermanual/best-practices.html
 
-###Writing Selenium Tests###
+### Writing Selenium Tests
 
 First, have in mind that selenium tests will also be run within JMeter and not as a separate selenium project. These tests are ideally used to automate 3rd party app interactions such as login to twitter, facebook etc. Selenium scripts should be scripted using JSR223 Sampler ( Do not use beanshell sampler).
 
