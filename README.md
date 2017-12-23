@@ -69,9 +69,9 @@ When writing solution tests for a given product, we need to follow the following
 │   ├── infra.sh
 │   ├── jmeter
 │   │   ├── XX-Soulution-02-Facebook.jmx
-│   │   ├── XX-post-scenario-steps.sh
+│   │   ├── YY-post-scenario-steps.sh
 │   │   ├── YY-pre-scenario-steps.sh
-│   │   └── YY-Soulution-02-Google.jmx
+│   │   └── XX-Soulution-02-Google.jmx
 │   ├── README.md
 │   ├── resources
 │   │   ├── 01-config.sh
@@ -151,7 +151,7 @@ ex:-> sh xx.pre-scenario-steps.sh
 
 Run jmeter scripts in command line (still on the same terminal)
 ```
-ex:-> path/to/jmeter/bin -n -t xx.xxxx.jmx -p path/to/user.properties -l xxxx.jtl
+ex:-> path/to/jmeter/bin/jmeter -n -t xx.xxxx.jmx -p path/to/user.properties -l xxxx.jtl
 ```
 
 Follow the step [2] above. 
