@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="3.2" jmeter="3.2 r1790748">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Update Registry Resource " enabled="true">
+      <stringProp name="TestPlan.comments">This script is for updating the tenant-conf.json in the Registry</stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+        <collectionProp name="CookieManager.cookies"/>
+        <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+        <stringProp name="CookieManager.policy">standard</stringProp>
+        <stringProp name="CookieManager.implementation">org.apache.jmeter.protocol.http.control.HC4CookieHandler</stringProp>
+      </CookieManager>
+      <hashTree/>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="host" elementType="Argument">
+            <stringProp name="Argument.name">host</stringProp>
+            <stringProp name="Argument.value">localhost</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="port" elementType="Argument">
+            <stringProp name="Argument.name">port</stringProp>
+            <stringProp name="Argument.value">9443</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Update a Registry Resource" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1515603236000</longProp>
+        <longProp name="ThreadGroup.end_time">1515603236000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Update a registry resource file" enabled="true"/>
+        <hashTree>
+          <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+            <collectionProp name="CookieManager.cookies"/>
+            <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+            <stringProp name="CookieManager.implementation">org.apache.jmeter.protocol.http.control.HC4CookieHandler</stringProp>
+          </CookieManager>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Update Tenant Conf Json File" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+  &quot;EnableMonetization&quot; : false,&#xd;
+  &quot;IsUnlimitedTierPaid&quot; : false,&#xd;
+  &quot;ExtensionHandlerPosition&quot;: &quot;bottom&quot;,&#xd;
+  &quot;RESTAPIScopes&quot;: {&#xd;
+    &quot;Scope&quot;: [&#xd;
+      {&#xd;
+        &quot;Name&quot;: &quot;apim:api_publish&quot;,&#xd;
+        &quot;Roles&quot;: &quot;admin,Internal/publisher&quot;&#xd;
+      },&#xd;
+      {&#xd;
+        &quot;Name&quot;: &quot;apim:api_create&quot;,&#xd;
+        &quot;Roles&quot;: &quot;admin,Internal/creator&quot;&#xd;
+      },&#xd;
+      {&#xd;
+        &quot;Name&quot;: &quot;apim:api_view&quot;,&#xd;
+        &quot;Roles&quot;: &quot;admin,Internal/publisher,Internal/creator&quot;&#xd;
+      },&#xd;
+      {&#xd;
+        &quot;Name&quot;: &quot;apim:subscribe&quot;,&#xd;
+        &quot;Roles&quot;: &quot;admin,Internal/subscriber&quot;&#xd;
+      },&#xd;
+      {&#xd;
+        &quot;Name&quot;: &quot;apim:tier_view&quot;,&#xd;
+        &quot;Roles&quot;: &quot;admin,Internal/publisher,Internal/creator&quot;&#xd;
+      },&#xd;
+      {&#xd;
+        &quot;Name&quot;: &quot;apim:tier_manage&quot;,&#xd;
+        &quot;Roles&quot;: &quot;admin&quot;&#xd;
+      },&#xd;
+      {&#xd;
+        &quot;Name&quot;: &quot;apim:bl_view&quot;,&#xd;
+        &quot;Roles&quot;: &quot;admin&quot;&#xd;
+      },&#xd;
+      {&#xd;
+        &quot;Name&quot;: &quot;apim:bl_manage&quot;,&#xd;
+        &quot;Roles&quot;: &quot;admin&quot;&#xd;
+      },&#xd;
+      {&#xd;
+        &quot;Name&quot;: &quot;apim:subscription_view&quot;,&#xd;
+        &quot;Roles&quot;: &quot;admin,Internal/creator&quot;&#xd;
+      },&#xd;
+      {&#xd;
+        &quot;Name&quot;: &quot;apim:subscription_block&quot;,&#xd;
+        &quot;Roles&quot;: &quot;admin,Internal/creator&quot;&#xd;
+      },&#xd;
+      {&#xd;
+        &quot;Name&quot;: &quot;apim:mediation_policy_view&quot;,&#xd;
+        &quot;Roles&quot;: &quot;admin&quot;&#xd;
+      },&#xd;
+      {&#xd;
+        &quot;Name&quot;: &quot;apim:mediation_policy_create&quot;,&#xd;
+        &quot;Roles&quot;: &quot;admin&quot;&#xd;
+      },&#xd;
+      {&#xd;
+        &quot;Name&quot;: &quot;apim:api_workflow&quot;,&#xd;
+        &quot;Roles&quot;: &quot;admin&quot;&#xd;
+      }&#xd;
+    ]&#xd;
+  },&#xd;
+  &quot;NotificationsEnabled&quot;:&quot;true&quot;,&#xd;
+  &quot;Notifications&quot;:[{&#xd;
+    &quot;Type&quot;:&quot;new_api_version&quot;,&#xd;
+    &quot;Notifiers&quot; :[{&#xd;
+      &quot;Class&quot;:&quot;org.wso2.carbon.apimgt.impl.notification.NewAPIVersionEmailNotifier&quot;,&#xd;
+      &quot;ClaimsRetrieverImplClass&quot;:&quot;org.wso2.carbon.apimgt.impl.token.DefaultClaimsRetriever&quot;,&#xd;
+      &quot;Title&quot;: &quot;Version newtestAPI2.0 api of old api 1.0 Released&quot;,&#xd;
+      &quot;Template&quot;: &quot; &lt;html&gt; &lt;body&gt; &lt;h3 style=\&quot;color:Black;\&quot;&gt;We’re happy to announce the arrival of the next major version $2 of $1 API which is now available in Our API Store.&lt;/h3&gt;&lt;a href=\&quot;https://localhost:9443/store\&quot;&gt;Click here to Visit WSO2 API Store&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;&quot;&#xd;
+    }]&#xd;
+  }&#xd;
+  ],&#xd;
+  &quot;DefaultRoles&quot; : {&#xd;
+    &quot;PublisherRole&quot; : {&#xd;
+      &quot;CreateOnTenantLoad&quot; : true,&#xd;
+      &quot;RoleName&quot; : &quot;Internal/publisher&quot;&#xd;
+    },&#xd;
+    &quot;CreatorRole&quot; : {&#xd;
+      &quot;CreateOnTenantLoad&quot; : true,&#xd;
+      &quot;RoleName&quot; : &quot;Internal/creator&quot;&#xd;
+    },&#xd;
+    &quot;SubscriberRole&quot; : {&#xd;
+      &quot;CreateOnTenantLoad&quot; : true&#xd;
+    }&#xd;
+  }&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${host}</stringProp>
+            <stringProp name="HTTPSampler.port">${port}</stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/resource/1.0.0/artifact/_system/config/apimgt/applicationdata/tenant-conf.json</stringProp>
+            <stringProp name="HTTPSampler.method">PUT</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">media-type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Authorization</stringProp>
+                  <stringProp name="Header.value">Basic YWRtaW46YWRtaW4=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+    <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
+      <boolProp name="WorkBench.save">true</boolProp>
+    </WorkBench>
+    <hashTree/>
+  </hashTree>
+</jmeterTestPlan>
