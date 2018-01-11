@@ -60,8 +60,8 @@
             <stringProp name="Argument.value">/permission/admin/manage/api/publish</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="rolePermission3" elementType="Argument">
-            <stringProp name="Argument.name">rolePermission3</stringProp>
+          <elementProp name="role1Permission3" elementType="Argument">
+            <stringProp name="Argument.name">role1Permission3</stringProp>
             <stringProp name="Argument.value">/permission/admin/manage/api/create</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
