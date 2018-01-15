@@ -1,19 +1,23 @@
 # Introduction #
 
-This repository includes common guidelines, samples and references which needs to be followed when automating solutions for TG execution. TG is a versatile platform which enables tests to be executed on top of different hardware/software combinations along with WSO2 product deployment patterns. To explore further about TG you look intot the TG project from [here](https://github.com/wso2-incubator/wso2-test-grid).
+This repository includes common guidelines, samples and references which needs to be followed when automating scenarios for TG execution. TG is a versatile platform which enables tests to be executed on top of different hardware/software combinations along with WSO2 product deployment patterns. To explore further about TG you look intot the TG project from [here](https://github.com/wso2-incubator/wso2-test-grid).
 
 ## Repository Structure
 
 ```
 solution-test-toolkit
     ├── APIM
-    │   └── README.md
+    │   ├── samples
+    │   │   └── ReadME.md
+    │   └── ReadME.md
     ├── IS
     │   ├── artifacts
     │   │   └── ReadME.md
     │   └── samples
     │       ├── Create_IDP_using_AdminService.jmx
     │       └── Delete_IDP_using_AdminService.jmx
+    ├── common
+    │   ├── README.md
     ├── README.md
     └── templates
         └── README.md
@@ -22,11 +26,13 @@ solution-test-toolkit
 
 **templates**
 
-This directory includes the generic templates that can be used when writing tests. For example JMeter templates can be used as basic building blocks for solution automation. 
+This directory includes the generic templates that can be used when writing tests. For example JMeter templates can be used as basic building blocks for scenario automation. 
 
 **samples**
 
-This directory contains samples for different operations, you can read more from [here](https://github.com/jsonds/solution-test-toolkit/tree/master/IS/samples).
+This directory contains samples for different operations, you can read more,
+- For Identitiy Server [here](https://github.com/wso2-incubator/solution-test-toolkit/tree/master/IS/samples).
+- For API Manager [here](https://github.com/wso2-incubator/solution-test-toolkit/tree/master/APIM/samples).
 
 **artifacts**
 
@@ -37,34 +43,48 @@ This contains references for product specific common artifacts templates.
 
 ![Alt text](/screenshots/3.png?raw=true "Login")
 
-The above image shows a highlevel flow of the various phases that is traveresed through during test execution. Below is a summary of each phase which will help you understand what types of scripts that you need to develop for your solution.
-- Test Grid - TG will take care of the solution deployment and provide us with the hostnames (Cluster hostname and Tomcat host / port)
-- Infra Creation - At the moment we need to request instances manually depending on the solution needs(instances to setup databases, ldap etc.).
-- Product Alterations - If the solution needs any dependencies that requires alteration to product configurations such cases should be handled in this phase.
-- App Alterations - In this phase if the solution requires any alterations to be done for the apps that are used those should be handled in this phase.
-- Clean up - Ones the solution tests are finished executing all clean up tasks should be executed to create a clean environment for the next solution to be run.
+The above image shows a highlevel flow of the various phases that is traversed through during test execution. Below is a summary of each phase which will help you understand what types of scripts that you need to develop for your scenario.
+- Test Grid - TG will take care of the scenario deployment and provide us with the hostnames (Cluster hostname and Tomcat host / port)
+- Infra Creation - At the moment we need to request instances manually depending on the scenario needs(instances to setup databases, ldap etc.).
+- Product Alterations - If the scenario needs any dependencies that requires alteration to product configurations such cases should be handled in this phase.
+- App Alterations - In this phase if the scenario requires any alterations to be done for the apps that are used those should be handled in this phase.
+- Clean up - Ones the scenario tests are finished executing all clean up tasks should be executed to create a clean environment for the next scenario to be run.
 
 
-
-
-
-
-
-
-
-	
-
-
-
-
-# How to Develop Solution Tests
+# How to Develop Scenario Tests
 ## Writing Infrastructure creation Scripts
 At the moment this is done manually, test infrastructure always reside on AWS and they are up and running. When a new instance is required TG team will create it manually and provide instance details on request. This can be done automatically by developing CF scripts. 
-## Test Solution Repository Structure
-When writing solution tests for a given product, we need to follow the following repository structure. This structure contains scripts necessary to deploy/undeploy infrastructure, deploy/undeploy artefacts, test scripts and cleanup scripts. The soltuions tests are maintained in this [repository](https://github.com/wso2-incubator/identity-test-integration).
+
+## Test Scenario Repository Structure
+When writing scenario tests for a given product, we need to follow the following repository structure. This structure contains scripts necessary to deploy/undeploy infrastructure, deploy/undeploy artifacts, test scripts and cleanup scripts. The soltuions tests are maintained in this [repository](https://github.com/wso2-incubator/identity-test-integration).
+
+### scenario-metadata.yml
+In order to generate a comprehensible test-report for TestGrid, we need a mapping between the scenario IDs to their scenario description. For this purpose, scenario-metadata.yml file is using with the following structure to set
 
 ```
-├── solution02
+scenarios:
+  - id: <<scenarioID>>
+    name: <<"Scenario Description">>
+    tests:
+      - test-type: <<Type of the Test. Ex-jmeter, testng>>
+        test-location: <<Path to the tests>>     #testgrid can assume this location by default. So, no need to mention
+      - test-type: <<Type of the Test. Ex-jmeter, testng>>
+        test-location: <<Path to the tests>>     #testgrid can assume this location by default. So, no need to mention
+  - id: <<Scenario_ID>>
+    name: <<"Scenario Description">>
+```
+
+id - Provide the scenario id (ex- scenario01)
+name - Provide the name of the scenario (ex-Single Sign On with delegated access control)
+test type - The type of the tests used such as jmeter, testng
+test-location - Location where the tests resides within the main repo
+
+### Scenario specific structure
+
+Following structure is using for each scenario.
+
+```
+├── scenario02
 │   ├── base-setup.sh
 │   ├── infra.sh
 │   ├── jmeter
@@ -83,15 +103,14 @@ When writing solution tests for a given product, we need to follow the following
 ```
 
 - XX - Sequential number : starts from 01..
-- YY - Use solution number
+- YY - Use scenario number
 
-You can find a detailed description of the repository structure in 3.3 section
 
 ## Writing Test-Artifacts Deployment Scripts
 
-Test artifacts deployment is handled by the set of shell scripts which are specific to the solution. Travelocity.com & Playground apps are the main artifacts we use in the identity server solutions. You can find the samples shipped with IS from https://github.com/wso2/product-is/tree/5.x.x/modules/samples.
+Test artifacts deployment is handled by the set of shell scripts which are specific to the scenario. Travelocity.com & Playground apps are the main artifacts we use in the identity server scenarios. You can find the samples shipped with IS from https://github.com/wso2/product-is/tree/5.x.x/modules/samples.
 
-Lets consider **Solution 02** from the Identity server solutions [list](https://medium.facilelogin.com/thirty-solution-patterns-with-the-wso2-identity-server-16f9fd0c0389) as an example. Inside the [directory](https://github.com/wso2-incubator/identity-test-integration/tree/master/solution02/src/test), we can see below hierarchy of files. All other scenarios should have the same hierarchy of contents.
+Lets consider **Scenario 02** from the Identity server scenarios [list](https://medium.facilelogin.com/thirty-solution-patterns-with-the-wso2-identity-server-16f9fd0c0389) as an example. Inside the [directory](https://github.com/wso2-incubator/identity-test-integration/tree/master/scenario02), we can see below hierarchy of files. All other scenarios should have the same hierarchy of contents.
 
 ```
 .
@@ -108,7 +127,7 @@ Lets consider **Solution 02** from the Identity server solutions [list](https://
 
 ```
 
-Below is the correct order of the steps which TG runs the scripts of the solutions.
+Below is the correct order of the steps which TG runs the scripts of the scenarios.
 
 **Step [1]**
 xx-pre-scenario-steps.sh - This is the initial file run by TG. Inside here, we are configuring the serverHost, serverPort, tomcatHost and tomcatPort parameters in user.properties file.
@@ -121,10 +140,10 @@ base-setup.sh - this is where we configure third party apps. Have used several l
 As the next step TG invokes all the jmeter scripts inside jmeter directory.
 
 **Step [3]**
-Finally TG invokes xx-post-scenario-steps.sh and it calls to the teardown.sh. Mainly we un-deploy the apps deployed in the tomcat server and also remove temporary directories which were created from step [1]
+Finally TG invokes xx-post-scenario-steps.sh and it calls to the teardown.sh. Mainly we undeploy the apps deployed in the tomcat server and also remove temporary directories which were created from step [1]
 
 We have to follow the same way of above naming convention on all the scenario scripts. 
-Ex:- pre and post scenario scripts’ name should be started with the solution number (two digits)
+Ex:- pre and post scenario scripts’ name should be started with the scenario number (two digits)
 The name of all jmeter scripts should be started with two digit number which starts from 01 and increment by sequentially.
 
 **How to test and verify locally:**
@@ -221,7 +240,7 @@ Ones you add the JSR223 Sampler make sure to change the “Language” as java (
 
 # Setting up Prerequisites
 
-To develop solution baseds tests there are several prerequisites (Create IDP, SP, Policies etc.) that needs to be created before the solution tests are executed. These prerequisites should be scripted in JMeter with the use of admin services provided by the product.
+To develop scenario based tests there are several prerequisites (Create IDP, SP, Policies etc.) that needs to be created before the scenario tests are executed. These prerequisites should be scripted in JMeter with the use of admin services provided by the product.
 
 
 
