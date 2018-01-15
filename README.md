@@ -8,11 +8,11 @@ This repository includes common guidelines, samples and references which needs t
 solution-test-toolkit
     ├── APIM
     │   ├── samples
-    │   │   └── ReadME.md
-    │   └── ReadME.md
+    │   │   └── README.md
+    │   └── README.md
     ├── IS
     │   ├── artifacts
-    │   │   └── ReadME.md
+    │   │   └── README.md
     │   └── samples
     │       ├── Create_IDP_using_AdminService.jmx
     │       └── Delete_IDP_using_AdminService.jmx
