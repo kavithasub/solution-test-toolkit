@@ -59,7 +59,7 @@ At the moment this is done manually, test infrastructure always reside on AWS an
 When writing scenario tests for a given product, we need to follow the following repository structure. This structure contains scripts necessary to deploy/undeploy infrastructure, deploy/undeploy artifacts, test scripts and cleanup scripts. The soltuions tests are maintained in this [repository](https://github.com/wso2-incubator/identity-test-integration).
 
 ### scenario-metadata.yml
-In order to generate a comprehensible test-report for TestGrid, we need a mapping between the scenario IDs to their scenario description. For this purpose, scenario-metadata.yml file is using with the following structure to set
+In order to generate a comprehensible test-report for TestGrid, we need a mapping between the scenario IDs to their scenario description. For this purpose, scenario-metadata.yml file is using with the following structure to set id, name and tests respective to each scenario.
 
 ```
 scenarios:
