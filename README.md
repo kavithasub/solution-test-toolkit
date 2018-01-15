@@ -74,10 +74,10 @@ scenarios:
     name: <<"Scenario Description">>
 ```
 
-id - Provide the scenario id (ex- scenario01)
-name - Provide the name of the scenario (ex-Single Sign On with delegated access control)
-test type - The type of the tests used such as jmeter, testng
-test-location - Location where the tests resides within the main repo
+- id - Provide the scenario id (ex- scenario01)
+- name - Provide the name of the scenario (ex-Single Sign On with delegated access control)
+- test type - The type of the tests used such as jmeter, testng
+- test-location - Location where the tests resides within the main repo
 
 ### Scenario specific structure
 
