@@ -4,6 +4,9 @@ This sample includes requests for client registration, access token generation a
 ## Application creation and subscription - APISubscription.jmx
 This sample is a example demonstration for application creation and subscription through REST APIs available in WSO2 API Manager.
 
+## Associating a custom sequence to an api through registry api - AddingCustomSeqThroughReg.jmx
+This sample will provide an example to engaging a custom sequence to an api which is added as a registry resource. 
+
 ## Update_Registry_Resource_File.jmx
 This sample is a example on how to update a registry resource file using registry REST API
 
@@ -12,3 +15,6 @@ This sample is a example on how to create subscriber creator and publisher users
 
 ## advance_throttling_policy_management_using_REST_APIs.jmx
 This is example on how to add advance throttling policies with "bandwith" or "request count" categories to admin dashboard using admin permission and tier scope, and update the policies.
+
+## Associating a custom sequence to an api through registry api - AddingCustomSeqThroughReg.jmx
+This sample will provide an example to engaging a custom sequence to an api which is added as a registry resource. 
