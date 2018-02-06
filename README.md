@@ -88,10 +88,10 @@ Following structure is using for each scenario.
 │   ├── base-setup.sh
 │   ├── infra.sh
 │   ├── jmeter
-│   │   ├── XX-Soulution-02-Facebook.jmx
+│   │   ├── XX-Scenario-02-Facebook.jmx
 │   │   ├── YY-post-scenario-steps.sh
 │   │   ├── YY-pre-scenario-steps.sh
-│   │   └── XX-Soulution-02-Google.jmx
+│   │   └── XX-Scenario-02-Google.jmx
 │   ├── README.md
 │   ├── resources
 │   │   ├── 01-config.sh
@@ -117,8 +117,8 @@ Lets consider **Scenario 02** from the Identity server scenarios [list](https://
 ├── README.md
 ├── base-setup.sh
 ├── jmeter
-│   ├── 01-Solution-02-Facebook.jmx
-│   ├── 02-Solution-02-Google.jmx
+│   ├── 01-Scenario-02-Facebook.jmx
+│   ├── 02-Scenario-02-Google.jmx
 │   ├── 02-post-scenario-steps.sh
 │   └── 02-pre-scenario-steps.sh
 ├── resources
@@ -146,17 +146,22 @@ We have to follow the same way of above naming convention on all the scenario sc
 Ex:- pre and post scenario scripts’ name should be started with the scenario number (two digits)
 The name of all jmeter scripts should be started with two digit number which starts from 01 and increment by sequentially.
 
-**How to test and verify locally:**
+## How to test and verify locally
 
-Once you are done with the automation scripts please verify those as in the same order explained above. 
+Once you are done with the automation scripts please verify those as in the same order explained above in a clustered setup.
 For verifying this locally, you can simply follow the below steps.
+
 Export input variables in the terminal
-**>>export serverHost=<is_host> serverPort=<is_port> tomcatHost=<tomcatHost> tomcatPort=<tomcatPort>**
+
+**export serverHost=<is_host> serverPort=<is_port> tomcatHost=<tomcatHost> tomcatPort=<tomcatPort>**
+
 Ex:
 ```
->>export serverHost=is.localtest.com serverPort=9454 tomcatHost=localhost tomcatPort=8090
+export serverHost=is.localtest.com serverPort=9454 tomcatHost=localhost tomcatPort=8090
 ```
-Update below two lines in the base-setup.sh as replaccing values with your tomact user/password.
+Make sure to parameterize all the scripts to read the values exported.
+
+Update below two lines in the base-setup.sh as replacing values with your tomact user/password.
 ```
 tomcatUsername=<username>
 tomcatPassword=<password>
