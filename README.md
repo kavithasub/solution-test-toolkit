@@ -131,7 +131,9 @@ Check WSO2Scenariofile.yaml file and see whether the particular solution has ass
 
 **Step[2]**
 Run init.sh providing load balancer ip ($IPLoadBalancer) as a parameter.
+
 **Note:** run-scenarios.sh file includes the below steps [3], [4] and [5] hence by running the that file, all steps will be run on one go. JMETER_HOME should be provided as a parameter.
+
 **Step[3]**
 Run xx-pre-scenario-steps.sh by providing serverHost, serverPort, tomcatHost, tomcatPort, tomcatUsername, tomcatPassword as parameters.
 And this will call the base-setup.sh file which is in one level up.
@@ -167,6 +169,8 @@ Use the Jmeter GUI and open the jtl file which generated from above step 3. If t
 # Product Deployment Alterations (config set)
 
 This script should be used to make changes to the the deployment, for example if you need to change a configuration in the IS deployment you need have that within this script. Similarly for changes regarding to connectors (copy .jars, add configurations) should also be handled in this script.
+
+Please refer Step[1] under 'Writing Test-Artifacts Deployment Scripts' section.
 
 # How to Write Tests
 
