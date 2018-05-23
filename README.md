@@ -84,27 +84,23 @@ scenarios:
 Following structure is using for each scenario.
 
 ```
-├── scenario02
-│   ├── base-setup.sh
-│   ├── infra.sh
-│   ├── jmeter
-│   │   ├── XX-Scenario-02-Facebook.jmx
-│   │   ├── YY-post-scenario-steps.sh
-│   │   ├── YY-pre-scenario-steps.sh
-│   │   └── XX-Scenario-02-Google.jmx
-│   ├── README.md
-│   ├── resources
-│   │   ├── 01-config.sh
-│   │   ├── 02-config.sh
-│   │   └── user.properties
-│   └── teardown.sh
-
+scenarioXX
+.
+├── README.md
+├── base-setup.sh
+├── jmeter
+│   ├── YY-Scenario-XX-test1.jmx
+│   ├── YY-Scenario-XX-test2.jmx
+│   ├── XX-post-scenario-steps.sh
+│   └── XX-pre-scenario-steps.sh
+├── resources
+│   └── user.properties
+└── teardown.sh
 
 ```
 
-- XX - Sequential number : starts from 01..
-- YY - Use scenario number
-
+- YY - Sequential number : starts from 01..
+- XX - Scenario number
 
 ## Writing Test-Artifacts Deployment Scripts
 
@@ -113,75 +109,57 @@ Test artifacts deployment is handled by the set of shell scripts which are speci
 Lets consider **Scenario 02** from the Identity server scenarios [list](https://medium.facilelogin.com/thirty-solution-patterns-with-the-wso2-identity-server-16f9fd0c0389) as an example. Inside the [directory](https://github.com/wso2-incubator/identity-test-integration/tree/master/scenario02), we can see below hierarchy of files. All other scenarios should have the same hierarchy of contents.
 
 ```
-.
 ├── README.md
 ├── base-setup.sh
 ├── jmeter
-│   ├── 01-Scenario-02-Facebook.jmx
-│   ├── 02-Scenario-02-Google.jmx
-│   ├── 02-post-scenario-steps.sh
-│   └── 02-pre-scenario-steps.sh
+│   ├── 01-Scenario-02-Facebook.jmx
+│   ├── 02-Scenario-02-Google.jmx
+│   ├── 02-post-scenario-steps.sh
+│   ├── 02-pre-scenario-steps.sh
+│   ├── 03-Scenario-02-ISasIDP.jmx
+│   └── 04-Scenario-02-EmailOTP.jmx
 ├── resources
-│   └── user.properties
+│   └── user.properties
 └── teardown.sh
 
 ```
 
-Below is the correct order of the steps which TG runs the scripts of the scenarios.
+Below is the correct order of the steps which supposed to runs the scripts of the scenarios.
 
-**Step [1]**
-xx-pre-scenario-steps.sh - This is the initial file run by TG. Inside here, we are configuring the serverHost, serverPort, tomcatHost and tomcatPort parameters in user.properties file.
-And it calls to the base-setup.sh file which is in one level up.
+**Step[1]**
+Check WSO2Scenariofile.yaml file and see whether the particular solution has associated config-set/s. If yes, then select relevat config set directory and copy it to the all(or relevant) product nodes andand run apply-config.sh. Note: PRODUCT_HOME should be provided as a parameter.
 
-**Step [1.1]**
+**Step[2]**
+Run init.sh providing load balancer ip ($IPLoadBalancer) as a parameter.
+
+**Note:** run-scenarios.sh file includes the below steps [3], [4] and [5] hence by running the that file, all steps will be run on one go. JMETER_HOME should be provided as a parameter.
+
+**Step[3]**
+Run xx-pre-scenario-steps.sh by providing serverHost, serverPort, tomcatHost, tomcatPort, tomcatUsername, tomcatPassword as parameters.
+And this will call the base-setup.sh file which is in one level up.
+
+**Step [3.1]**
 base-setup.sh - this is where we configure third party apps. Have used several linux command to configure and build applications. Also it will call tomcat rest API to publish configured apps.
 
-**Step [2]**
-As the next step TG invokes all the jmeter scripts inside jmeter directory.
+**Step [4]**
+Invokes all the jmeter scripts inside jmeter directory.
 
-**Step [3]**
-Finally TG invokes xx-post-scenario-steps.sh and it calls to the teardown.sh. Mainly we undeploy the apps deployed in the tomcat server and also remove temporary directories which were created from step [1]
+**Step [5]**
+Then invoke xx-post-scenario-steps.sh and it calls to the teardown.sh. Mainly we undeploy the apps deployed in the tomcat server and also remove temporary directories which were created from step[3]
 
-We have to follow the same way of above naming convention on all the scenario scripts. 
+**Step [6]**
+Run revert-config.sh file inside the IS nodes where we ran the apply-config.sh from step[1]
+
+We have to follow the same way of above naming convention on all the scenario scripts.
 Ex:- pre and post scenario scripts’ name should be started with the scenario number (two digits)
 The name of all jmeter scripts should be started with two digit number which starts from 01 and increment by sequentially.
 
 ## How to test and verify locally
 
 Once you are done with the automation scripts please verify those as in the same order explained above in a clustered setup.
-For verifying this locally, you can simply follow the below steps.
 
-Export input variables in the terminal
-
-**export serverHost=<is_host> serverPort=<is_port> tomcatHost=<tomcatHost> tomcatPort=<tomcatPort>**
-
-Ex:
-```
-export serverHost=is.localtest.com serverPort=9454 tomcatHost=localhost tomcatPort=8090
-```
-Make sure to parameterize all the scripts to read the values exported.
-
-Update below two lines in the base-setup.sh as replacing values with your tomact user/password.
-```
-tomcatUsername=<username>
-tomcatPassword=<password>
-```
 **Important** you have to enable the role manager-script and assign that role to the particular user in tomcat-users.xml file which is in <tomcat_home>/conf/ directory
 
-Follow the Step [1] above ( as being on the same terminal )
-```
-ex:-> sh xx.pre-scenario-steps.sh
-```
-
-Run jmeter scripts in command line (still on the same terminal)
-```
-ex:-> path/to/jmeter/bin/jmeter -n -t xx.xxxx.jmx -p path/to/user.properties -l xxxx.jtl
-```
-
-Follow the step [2] above. 
-```
-ex:-> sh xx-post-scenario-steps.sh
-```
 
 **Verifications**
 
@@ -191,6 +169,8 @@ Use the Jmeter GUI and open the jtl file which generated from above step 3. If t
 # Product Deployment Alterations (config set)
 
 This script should be used to make changes to the the deployment, for example if you need to change a configuration in the IS deployment you need have that within this script. Similarly for changes regarding to connectors (copy .jars, add configurations) should also be handled in this script.
+
+Please refer Step[1] under 'Writing Test-Artifacts Deployment Scripts' section.
 
 # How to Write Tests
 
